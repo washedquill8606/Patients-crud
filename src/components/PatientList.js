@@ -14,9 +14,13 @@ export default function PatientList() {
         let mount = true
         getpatient()
         .then(res => {console.log("res from api", res)
-            setPatients(res)
-            return() => mount = false
+            if (mount) {
+                setPatients(res)
+            }
         })
+        return () => {
+            mount = false
+        }
     }, [])
 
 const handleAddSubmit = (e) => {
